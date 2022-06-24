@@ -1,0 +1,122 @@
+{% load static %}
+{% load catalogo_tags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Roboto+Condensed&family=Roboto+Slab&family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <title>{{ tecnologia.nombre }}</title>
+</head>
+<body class="imprimible">
+    <section class="container is-fluid">
+        <div class="columns">
+            <div class="column columns is-flex is-flex-direction-column mb-0">
+                <div class="column">
+                    <img src="{% static 'img/logo-catalogo-inverted.svg' %}" class="logo">
+                </div>
+                <div class="column">
+                    <h1 class="title is-size-5">{{ tecnologia.nombre }}</h1>
+                    <p class="subtitle is-size-6">{{ tecnologia.resumen }}</p>
+                    <p class="subtitle is-size-6">Trabajo llevado a cabo por {{ tecnologia.realizadores.all|join:", " }}.</p>
+                    <p><a href="{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}">
+                        {{ request.scheme }}://{{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}
+                    </a></p>
+                </div>
+            </div>
+            <div class="column is-narrow">
+                <figure class="image">
+                    {% if tecnologia.ilustracion %}
+                        <img src="{{ tecnologia.ilustracion.imagen.url }}"
+                             alt="{{ tecnologia.ilustracion.descripcion_corta }}">
+                    {% else %}
+                        <img src="{% static 'img/tecnologia-sin-imagen.jpg' %}"
+                             alt="Tecnología aún no cuenta con una ilustración">
+                    {% endif %}
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container is-fluid">
+            <p class="is-size-6 mb-3 mt-3 descripcion">
+                {{ tecnologia.descripcion }}
+            </p>
+            <table class="table table-web">
+            <thead>
+            <tr>
+                <th scope="row">NOMBRE TECNOLOGÍA</th>
+                <th data-label="Nombre Tecnología">{{ tecnologia.nombre }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Realizadores</th>
+                <td data-label="Realizadores">
+                    {{ tecnologia.realizadores.all|join:"<br/>" }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Comunas</th>
+                <td data-label="Comunas">
+                    {{ tecnologia.localidades.all|join:"<br/>" }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Zona</th>
+                <td data-label="Zona">
+                    {% lista_de_zonas tecnologia %}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Territorio</th>
+                <td data-label="Territorio">
+                    {% lista_de_territorios tecnologia %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-web">
+            <tbody>
+            <tr>
+                <th scope="col" colspan="2">Descripción de tecnología: artefacto o
+                    proceso
+                </th>
+            </tr>
+            <tr>
+                <th scope="row">En qué consiste</th>
+                <td data-label="En qué consiste">{{ tecnologia.objetivo }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Problema que busca resolver</th>
+                <td data-label="Problema">{{ tecnologia.problema_descripcion }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Materiales</th>
+                <td data-label="Materiales">{{ tecnologia.materiales }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Aspectos técnicos</th>
+                <td data-label="Aspectos técnicos">{{ tecnologia.aspectos_tecnicos }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Costos y dificultad</th>
+                <td data-label="Costos">{{ tecnologia.dificultad_costo }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        window.print()
+    });
+</script>
+
+</body>
+</html>

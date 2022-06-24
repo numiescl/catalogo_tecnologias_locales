@@ -1,0 +1,32 @@
+{% load static %}
+<div class="column is-half-tablet is-one-third-desktop tarjetas">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image">
+                <a href="{% url 'detalles_tecnologia' slug=tecnologia.slug %}">
+                    {% if tecnologia.ilustracion %}
+                        <img src="{{ tecnologia.ilustracion.imagen.url }}">
+                    {% else %}
+                        <img src="{% static 'img/tecnologia-sin-imagen.jpg' %}">
+                    {% endif %}
+                </a>
+            </figure>
+        </div>
+        <div class="card-content">
+            <a href="{% url 'detalles_tecnologia' slug=tecnologia.slug %}" class="title is-size-4 mb-0">
+                {{ tecnologia.nombre }}
+            </a>
+            <p class="lead is-size-6 mb-5">
+                {{ tecnologia.resumen }}
+            </p>
+            <div class="card-bottom">
+                <a href="{% url 'detalles_tecnologia' slug=tecnologia.slug %}">
+                    <span class="icon is-large">
+                        <i class="fas fa-2x fa-plus-circle"></i>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

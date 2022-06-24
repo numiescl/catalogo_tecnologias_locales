@@ -1,0 +1,109 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Contacto
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <h1 class="container title is-size-2">Contacto</h1>
+            <p class="container is-size-3">{{ tecnologia.nombre }}</p>
+        </div>
+    </section>
+    <section class="section container contacto">
+        <div class="columns is-centered">
+            {% if form.errors %}
+                <div class="column is-three-quarters-desktop notificacion">
+                    <div class="message is-danger">
+                        <div class="message-header">
+                            <p>Atención</p>
+                            <button class="delete" aria-label="delete"></button>
+                        </div>
+                        <div class="message-body">
+                            Hubo un problema en el formulario. Por favor corrige los errores señalados para que podamos
+                            responderte.
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-three-quarters-desktop">
+                <div class="card">
+                    <div class="card-content">
+                        {% if tecnologia %}
+                        <form action="{% url 'contacto' %}?tecnologia={{ tecnologia.id }}" method="post">
+                        {% else %}
+                        <form action="{% url 'contacto' %}" method="post">
+                        {% endif %}
+                            {% csrf_token %}
+                            <label class="label">Tus datos:</label>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control is-expanded has-icons-left">
+                                            {{ form.nombre }}
+                                            <figure class="icon is-small is-left">
+                                                <i class="fas fa-lg fa-user"></i>
+                                            </figure>
+                                        </div>
+                                        <p class="help is-danger">{{ form.nombre.errors }}</p>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control is-expanded has-icons-left">
+                                            {{ form.correo }}
+                                            <figure class="icon is-small is-left">
+                                                <i class="fas fa-lg fa-envelope"></i>
+                                            </figure>
+                                        </div>
+                                        <p class="help is-danger">{{ form.correo.errors.as_text }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="label">Asunto:</label>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            {{ form.asunto }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="help is-danger">{{ form.asunto.errors }}</p>
+                            </div>
+                            <label class="label">Mensaje:</label>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            {{ form.mensaje }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="help is-danger">{{ form.mensaje.errors }}</p>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    {{ form.captcha }}
+                                    <input type="submit" class="button" value="Enviar Mensaje">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        let notificacion = document.getElementsByClassName('notificacion')[0]
+
+        notificacion.getElementsByClassName('delete')[0].addEventListener('click', () => {
+            notificacion.classList.add('is-hidden')
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% load catalogo_tags %}
+
+{% block meta %}
+    <meta name="twitter:card" content="summary"/>
+    <meta name="title" content="{{ tecnologia.nombre }}"/>
+    <meta property="og:title" content="{{ tecnologia.nombre }}"/>
+    <meta name="twitter:title" content="Catálogo de Tecnologías Locales"/>
+    <meta name="description" content="{{ tecnologia.resumen }}"/>
+    <meta property="og:description" content="{{ tecnologia.resumen }}"/>
+    <meta property="twitter:description" content="{{ tecnologia.resumen }}"/>
+    <meta property="og:url" content="{{ request.scheme }}://
+            {{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}"/>
+    <meta property="og:image"
+          content="{{ request.scheme }}://{{ request.get_host }}{{ tecnologia.ilustracion.imagen.url }}"/>
+    <meta property="twitter:image"
+          content="{{ request.scheme }}://{{ request.get_host }}{{ tecnologia.ilustracion.imagen.url }}"/>
+    <meta property="twitter:alt" content="{{ tecnologia.ilustracion.descripcion_corta }}"/>
+{% endblock %}
+
+{% block title %}
+    {{ tecnologia.nombre }}
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-flex is-flex-direction-column">
+                        <h1 class="title is-size-1 pb-5">{{ tecnologia.nombre }}</h1>
+                        <div class="acciones is-size-6">
+                            <a href="{% url 'tecnologia_imprimible' slug=tecnologia.slug %}" target="_blank">IMPRIMIR
+                                FICHA</a>
+                            |
+                            <a href="#share-modal" class="share-btn" data-target="share-modal">COMPARTIR FICHA</a>
+                        </div>
+                    </div>
+                    <div class="column is-narrow">
+                        <figure class="image">
+                            {% if tecnologia.ilustracion %}
+                                <img src="{{ tecnologia.ilustracion.imagen.url }}"
+                                     alt="{{ tecnologia.ilustracion.descripcion_corta }}">
+                            {% else %}
+                                <img src="{% static 'img/tecnologia-sin-imagen.jpg' %}"
+                                     alt="Tecnología aún no cuenta con una ilustración">
+                            {% endif %}
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container content">
+        <h2 class="title">
+            {{ tecnologia.nombre }}
+        </h2>
+        <div class="tags">
+            {% for etiqueta in tecnologia.etiquetas.all %}
+                <span class="tag is-dark">{{ etiqueta }}</span>
+            {% endfor %}
+        </div>
+        <p class="is-size-5">
+            {{ tecnologia.descripcion }}
+        </p>
+
+        <table class="table table-web">
+            <thead>
+            <tr>
+                <th scope="row">NOMBRE TECNOLOGÍA</th>
+                <th data-label="Nombre Tecnología">{{ tecnologia.nombre }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Realizadores</th>
+                <td data-label="Realizadores">
+                    {{ tecnologia.realizadores.all|join:"<br/>" }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Comunas</th>
+                <td data-label="Comunas">
+                    {{ tecnologia.localidades.all|join:"<br/>" }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Zona</th>
+                <td data-label="Zona">
+                    {% lista_de_zonas tecnologia %}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Territorio</th>
+                <td data-label="Territorio">
+                    {% lista_de_territorios tecnologia %}
+                </td>
+            </tr>
+            <tr>
+                <th scope="col" colspan="2">Descripción de tecnología: artefacto o proceso
+                </th>
+            </tr>
+            <tr>
+                <th scope="row">En qué consiste</th>
+                <td data-label="En qué consiste">{{ tecnologia.objetivo }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Problema que busca resolver</th>
+                <td data-label="Problema">{{ tecnologia.problema_descripcion }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Materiales</th>
+                <td data-label="Materiales">{{ tecnologia.materiales }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Aspectos técnicos</th>
+                <td data-label="Aspectos técnicos">{{ tecnologia.aspectos_tecnicos }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Costos y dificultad</th>
+                <td data-label="Costos">{{ tecnologia.dificultad_costo }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="is-size-5 mb-6">
+            {{ tecnologia.descripcion_historia|linebreaks }}
+        </div>
+
+        <div class="columns is-mobile is-vcentered is-size-5 acciones">
+            <p class="column has-text-left">
+                <a href="{% url 'contacto' %}?tecnologia={{ tecnologia.id }}">Preguntar sobre esta tecnología</a>
+            </p>
+            <p class="column has-text-right">
+                <a href="{% url 'tecnologia_imprimible' slug=tecnologia.slug %}" target="_blank">Imprimir Ficha</a>
+                |
+                <a href="#share-modal" class="share-btn" data-target="share-modal">Compartir</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="modal" id="share-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Compartir</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body has-text-centered">
+                <!-- Sharingbutton Facebook -->
+                <a class="resp-sharing-button__link"
+                   href="https://facebook.com/sharer/sharer.php?u={{ request.scheme }}://{{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}"
+                   target="_blank" rel="noopener" aria-label="Facebook">
+                    <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium">
+                        <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/>
+                            </svg>
+                        </div>
+                        Facebook
+                    </div>
+                </a>
+
+                <!-- Sharingbutton Twitter -->
+                <a class="resp-sharing-button__link"
+                   href="https://twitter.com/intent/tweet/?text=Encontr%C3%A9%20esta%20tecnolog%C3%ADa%20en%20el%20Cat%C3%A1logo%20de%20Tecnolog%C3%ADas%20Locales&amp;url={{ request.scheme }}://{{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}"
+                   target="_blank" rel="noopener" aria-label="Twitter">
+                    <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium">
+                        <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/>
+                            </svg>
+                        </div>
+                        Twitter
+                    </div>
+                </a>
+
+                <!-- Sharingbutton E-Mail -->
+                <a class="resp-sharing-button__link"
+                   href="mailto:?subject=Cat%C3%A1logo%20de%20Tecnolog%C3%ADas%20Locales%3A%20{{ tecnologia.nombre }}.&amp;body={{ tecnologia.descripcion }}%0D%0AM%C3%A1s%20informaci%C3%B3n%3A%20{{ request.scheme }}://{{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}"
+                   rel="noopener" aria-label="E-Mail">
+                    <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium">
+                        <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/>
+                            </svg>
+                        </div>
+                        E-Mail
+                    </div>
+                </a>
+
+                <!-- Sharingbutton Telegram -->
+                <a class="resp-sharing-button__link"
+                   href="https://telegram.me/share/url?text=Encontr%C3%A9%20este%20proyecto%3A%20{{ tecnologia.nombre }}&amp;url={{ request.scheme }}://{{ request.get_host }}{% url 'tecnologia_url_corto' slug=tecnologia.url_corto %}"
+                   target="_blank" rel="noopener" aria-label="Telegram">
+                    <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--medium">
+                        <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z"/>
+                            </svg>
+                        </div>
+                        Telegram
+                    </div>
+                </a>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/tecnologia_detail.js' %}"></script>
+{% endblock %}

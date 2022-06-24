@@ -1,0 +1,84 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Documentación
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="title is-size-1 pb-5">Documentación del Proyecto</h1>
+                    </div>
+                    <div class="column is-narrow">
+                        <nav class="panel indice">
+                            <p class="panel-heading">
+                                Índice
+                            </p>
+                            <div class="panel-block">
+                                <a href="{% url 'iniciativa' %}">Iniciativa</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="{% url 'equipo' %}">Equipo</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="#documentacion">Documentación</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section container content" id="documentacion">
+        <div class="columns is-multiline is-variable is-4 is-centered">
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title is-4 pb-4">
+                            <a href="{% static 'pdf/resumen-tlcc.pdf' %}" download>Resumen Ejecutivo</a>
+                        </h1>
+                        <p class="subtitle is-6">
+                            Este proyecto forma parte de las actividades de investigación y extensión del Núcleo Milenio
+                            en Energía y Sociedad y del proyecto FONDECYT “La vida social de las tecnologías
+                            sustentables”. El proyecto será desarrollado por Tomas Ariztia (director de NUMIES y
+                            académico de la Escuela de sociología UDP) y Aline Bravo (Investigadora de NUMIES y
+                            FONDECYT).
+                        </p>
+                        <div class="card-bottom">
+                            <a href="{% static 'pdf/resumen-tlcc.pdf' %}" download>
+                                <span class="icon is-large">
+                                    <i class="fas fa-2x fa-download"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title is-4 pb-4">
+                            <a href="{% static 'pdf/glosario-tlcc.pdf' %}" download>Glosario de Definiciones</a>
+                        </h1>
+                        <p class="subtitle is-6">
+                            Este breve documento interno presenta algunos conceptos centrales del proyecto tecnologías
+                            locales para la acción climática. Buscamos con esto facilitar la coordinación del trabajo de
+                            identificación preliminar de localidades y tecnologías locales.
+                        </p>
+                        <div class="card-bottom">
+                            <a href="{% static 'pdf/glosario-tlcc.pdf' %}" download>
+                                <span class="icon is-large">
+                                    <i class="fas fa-2x fa-download"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

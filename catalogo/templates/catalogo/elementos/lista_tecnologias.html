@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="columns is-multiline is-centered" id="tecnologias">
+        {% if not tecnologias %}
+            <div class="column">
+                <div class="message">
+                    <div class="message-header">
+                        <p>Oops!</p>
+                    </div>
+                    <div class="message-body">
+                        <p>No se encontraron tecnologías con los parámetros de búsqueda que hiciste. Trata de nuevo
+                        con otros términos.</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% for tecnologia in tecnologias %}
+            {% include 'catalogo/elementos/tarjeta.html' with tecnologia=tecnologia %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,171 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
+                        <h1 class="title is-size-1 pb-5">Catálogo de Tecnologías Locales</h1>
+                        <p class="subtitle is-size-5">El catálogo de tecnologías locales para la acción climática busca
+                            ser una plataforma para visibilizar y circular distintos artefactos, procesos o sistemas
+                            desarrolladas por comunidades en varios territorios de Chile y que están orientadas a
+                            resolver o mitigar algún problema concreto de carácter socioambiental. Las tecnologías que
+                            aquí se presentan, fueron desarrolladas y/o adaptadas por personas u organizaciones locales
+                            desde sus capacidades y conocimientos. Hemos organizado las tecnologías en función de
+                            distintas categorías que pueden seleccionar según sea su interés.</p>
+                    </div>
+                    <div class="column is-narrow is-flex is-justify-content-center">
+                        <figure class="image">
+                            <a href="{% url 'detalles_tecnologia' slug=tecnologia_cabecera.slug %}">
+                                {% if tecnologia_cabecera.ilustracion %}
+                                    <img src="{{ tecnologia_cabecera.ilustracion.imagen.url }}"
+                                         alt="{{ tecnologia_cabecera.ilustracion.descripcion_corta }}">
+                                {% else %}
+                                    <img src="{% static 'img/tecnologia-sin-imagen.jpg' %}"
+                                         alt="Tecnología aún no cuenta con una ilustración">
+                                {% endif %}
+                            </a>
+                            <figcaption>
+                                <a href="{% url 'detalles_tecnologia' slug=tecnologia_cabecera.slug %}">{{ tecnologia_cabecera.nombre }}</a>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container categorias" id="catalogo">
+        <form id="search-form">
+            <div class="field has-addons mb-5">
+                {% csrf_token %}
+                <div class="control">
+                    <input class="input" type="text" placeholder="Buscar una tecnología" id="query">
+                </div>
+                <div class="control">
+                    <button class="button" id="search" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="columns grid-de-botones is-gapless mb-0">
+
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro" onclick="filtrarPorEtiqueta('zona', this.value)"
+                        value="N">Norte
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro" onclick="filtrarPorEtiqueta('zona', this.value)"
+                        value="C">Centro
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro" onclick="filtrarPorEtiqueta('zona', this.value)"
+                        value="S">Sur
+                </button>
+            </div>
+        </div>
+
+        <div class="columns grid-de-botones is-desktop is-gapless mb-0">
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('categoria', this.value)" value="Agua">Agua
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('categoria', this.value)" value="Energía">Energía
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('categoria', this.value)" value="Actividades Productivas">
+                    Actividades Productivas
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('categoria', this.value)" value="Cuidado del Medio Ambiente">Cuidado
+                    del Medio Ambiente
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('categoria', this.value)" value="Reciclaje y Reaprovechamiento">
+                    Reutilización
+                </button>
+            </div>
+        </div>
+
+        <div class="columns grid-de-botones is-gapless mb-0 pb-4">
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('territorio', this.value)" value="COS">Costa
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('territorio', this.value)" value="VAL">Valle
+                </button>
+            </div>
+            <div class="column">
+                <button class="button is-large is-fullwidth filtro"
+                        onclick="filtrarPorEtiqueta('territorio', this.value)" value="COR">Cordillera
+                </button>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column">
+                <button class="button is-fullwidth" onclick="buscarTodas()" value="">Eliminar filtros</button>
+            </div>
+        </div>
+
+        <p class="is-size-6 mb-6">Las tecnologías identificadas se pueden imprimir o compartir. También se puede
+            identificar y contactar en cada una de ellas a la persona o comunidad que está detrás de cada una de estas
+            tecnologías. En algunos casos, hemos agregado también datos de otras personas que puedan ayudar a poner en
+            contacto a personas interesadas con quienes desarrollaron cada tecnología.</p>
+    </section>
+
+    <section class="listado-portada pb-6" id="listado-tecnologias">
+        <div class="container">
+            <div class="columns is-multiline is-centered" id="tecnologias">
+                <div class="column is-half-tablet is-one-third-desktop tarjetas">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="filler"></div>
+                        </div>
+                        <div class="card-content"></div>
+                    </div>
+                </div>
+                <div class="column is-half-tablet is-one-third-desktop tarjetas">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="filler"></div>
+                        </div>
+                        <div class="card-content"></div>
+                    </div>
+                </div>
+                <div class="column is-half-tablet is-one-third-desktop tarjetas">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="filler"></div>
+                        </div>
+                        <div class="card-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/inicio.js' %}"></script>
+{% endblock %}

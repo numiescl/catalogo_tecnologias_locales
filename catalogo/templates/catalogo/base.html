@@ -1,0 +1,120 @@
+{% load static %}
+{% load cookielaw_tags %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Catálogo de Tecnologías Locales - {% block title %}Inicio{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Roboto+Condensed&family=Roboto+Slab&family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+{% block meta %}
+    <meta name="twitter:card" content="summary"/>
+    <meta name="title" content="Catálogo de Tecnologías Locales" />
+    <meta property="og:title" content="Catálogo de Tecnologías Locales" />
+    <meta name="twitter:title" content="Catálogo de Tecnologías Locales"/>
+    <meta name="description" content="Plataforma pensada para ser usada por cualquier persona que requiera soluciones concretas a problemas vinculados a la crisis socio ecológicas" />
+    <meta property="og:description" content="Plataforma pensada para ser usada por cualquier persona que requiera soluciones concretas a problemas vinculados a la crisis socio ecológicas" />
+    <meta property="twitter:description" content="Plataforma pensada para ser usada por cualquier persona que requiera soluciones concretas a problemas vinculados a la crisis socio ecológicas" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/tecnologia-sin-imagen.jpg' %}" />
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/tecnologia-sin-imagen.jpg' %}"/>
+    <meta name="twitter:alt" content="Logo del catálogo"/>
+{% endblock %}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQ96ESGBL0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-NQ96ESGBL0');
+    </script>
+
+{# FAVICON #}
+<link rel="icon" href="{% static 'img/favicon/favicon32.ico' %}" sizes="any">
+<link rel="icon" href="{% static 'img/favicon/favicon.svg' %}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{% static 'img/favicon/favicon180.png' %}">
+
+
+</head>
+<body>
+{# BARRA DE NAVEGACION #}
+    <div class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div  class="navbar-brand">
+                <a class="navbar-item" href="{% url 'inicio' %}">
+                    <img src="{% static 'img/logo-catalogo.svg' %}" class="logo-catalogo">
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navBar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navBar" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="{% url 'inicio' %}#catalogo">Catálogo</a>
+                    <a class="navbar-item" href="{% url 'iniciativa' %}">Iniciativa</a>
+                    <a class="navbar-item" href="{% url 'equipo' %}">Equipo</a>
+                    <a class="navbar-item" href="{% url 'documentacion' %}">Documentación</a>
+                    <a class="navbar-item" href="{% url 'contacto' %}">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# CONTENIDO #}
+    {% block cuerpo %}
+    {% endblock %}
+
+<footer class="section main-footer">
+    <div class="columns is-mobile is-centered">
+        <div class="column columns is-mobile is-vcentered is-full-tablet is-three-fifths-desktop is-two-fifths-widescreen is-half-mobile is-multiline">
+            <div class="column is-full-mobile">
+                <figure class="image">
+                    <a href="https://numies.cl/"><img src="{% static 'img/logo-numies.png' %}" alt='Logo NUMIES'></a>
+                </figure>
+            </div>
+            <div class="column is-full-mobile">
+                <figure class="image">
+                    <a href="http://www.superacionpobreza.cl/"><img src="{% static 'img/logo-funasupo.png' %}" alt='Logo
+                    FUNASUPO'></a>
+                </figure>
+            </div>
+            <div class="column is-full-mobile">
+                <figure class="image">
+                    <a href="https://www.udp.cl/"><img src="{% static 'img/logo-udp.svg' %}" alt='Logo UDP'></a>
+                </figure>
+            </div>
+            <div class="column is-full-mobile">
+                <figure class="image">
+                    <a href="https://www.anid.cl/"><img src="{% static 'img/logo-anid.png' %}"  alt='Logo ANID'></a>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <div class="copyright has-text-centered">
+        <p class="is-size-7">© 2021 Equipo Catálogo de Tecnologías Locales.</p>
+        <p class="is-size-7"><a href="{% url 'politica_privacidad' %}">Política de Privacidad</a></p>
+    </div>
+</footer>
+{% cookielaw_banner %}
+
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

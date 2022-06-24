@@ -1,0 +1,38 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Contacto
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <h1 class="container title is-size-2">Contacto</h1>
+        </div>
+    </section>
+        <div class="section columns is-centered">
+            <div class="column is-half">
+                <div class="card">
+                    <div class="card-content">
+                       <h1 class="title is-size-4">Mensaje enviado correctamente</h1>
+                        <p class="is-size-5">
+                            Tu mensaje ha sido enviado correctamente. Te responderemos en los próximos días a tu correo
+                            personal. ¡Muchas gracias!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        let notificacion = document.getElementsByClassName('notificacion')[0]
+
+        notificacion.getElementsByClassName('delete')[0].addEventListener('click', () => {
+            notificacion.classList.add('is-hidden')
+        })
+    </script>
+{% endblock %}

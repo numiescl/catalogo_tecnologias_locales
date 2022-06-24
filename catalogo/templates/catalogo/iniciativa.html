@@ -1,0 +1,200 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Iniciativa
+{% endblock %}
+
+{% block cuerpo %}
+    <section class="hero cabecera">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="title is-size-1 pb-5">¿Qué es el catálogo de tecnologías locales?</h1>
+                        <p>El catálogo de tecnologías locales para la acción climática busca ser una plataforma para
+                            visibilizar y circular distintos artefactos, procesos o sistemas desarrolladas por
+                            comunidades en varios territorios de Chile y que están orientadas a resolver o mitigar algún
+                            problema concreto de carácter socioambiental. Las tecnologías que aquí se presentan, fueron
+                            desarrolladas y/o adaptadas por personas u organizaciones locales desde sus capacidades y
+                            conocimientos.
+                        </p>
+                    </div>
+                    <div class="column is-narrow">
+                        <nav class="panel indice">
+                            <p class="panel-heading">
+                                Índice
+                            </p>
+                            <div class="panel-block">
+                                <a href="#iniciativa">Iniciativa</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="{% url 'equipo' %}">Equipo</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="{% url 'documentacion' %}">Documentación</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {#    <section class="hero cabecera">#}
+    {#        <div class="hero-body is-align-items-stretch">#}
+    {#            <div class="container is-flex">#}
+    {#                <div class="columns is-vcentered">#}
+    {#                    <div class="column content">#}
+    {#                        <h1 class="title is-size-2 pb-5">¿Qué es el catálogo de tecnologías locales?</h1>#}
+    {#                        <p class="subtitle is-size-5"> El catálogo de tecnologías locales para la acción climática (CLT)#}
+    {#                            busca ser una plataforma para visibilizar#}
+    {#                            y circular distintos artefactos, estrategias o prácticas desarrolladas por comunidades en#}
+    {#                            distintos#}
+    {#                            territorios de Chile, orientadas a resolver o mitigar algún problema concreto de carácter#}
+    {#                            socioambiental.#}
+    {#                            Las tecnologías que aquí se presentan, fueron desarrolladas y/o adaptadas por distintas#}
+    {#                            personas u#}
+    {#                            organizaciones locales desde sus y capacidades y conocimientos.</p>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </section>#}
+    <section class="section container content" id="iniciativa">
+        <p>
+            El catálogo surge desde la premisa que las formas de conocimiento y tecnologías locales no han sido
+            suficientemente consideradas a nivel institucional como alternativas válidas y eficaces para enfrentar la
+            crisis socioambiental en curso. En este contexto, el catálogo busca dar a conocer a distintos públicos una
+            variedad de tecnologías locales existentes, así como las personas y comunidades que están detrás de ellas,
+            prefigurando procesos de transformación hacia formas de vida sustentables. Buscamos con esto visibilizar las
+            formas de conocer y actuar que se producen a nivel de los territorios y su relación con saberes y prácticas
+            localizadas. Así mismo, el catálogo busca poder crear espacios (virtuales y presenciales) que conecten y
+            visibilicen a estas tecnologías y a las comunidades que las desarrollan con otras comunidades o personas que
+            enfrentan problemas similares, creando y potenciando vínculos y trabajo cooperativos.
+        </p>
+        <h2>
+            ¿Qué entendemos por tecnologías locales?
+        </h2>
+        <p>
+            Entendemos por tecnologías locales aquellos artefactos, estrategias o prácticas orientadas a resolver o
+            mitigar algún problema concreto de carácter socioambiental en un territorio determinado. Concretamente, nos
+            interesa estudiar aquellas tecnologías que nacen de las comunidades en sus territorios y que descansan en el
+            uso de conocimientos situados para la resolución de problemas vinculados al medio ambiente. Esta definición,
+            incorpora por una parte tecnologías que han sido creadas por comunidades o actores de forma original, y por
+            otra, la existencia de reapropiaciones, modificaciones o adaptaciones a tecnologías introducidas como
+            resultado del uso que se hace de ellas en situaciones concretas. Para más información revisar sección
+            <a href="#">documentación del proyecto</a>.
+        </p>
+        <h2>
+            ¿Cómo catalogamos?
+        </h2>
+        <p>
+            <a href="{% url 'equipo' %}">Somos un equipo de cientistas sociales, diseñadores e ilustradores</a> que
+            trabajamos visitando distintos territorios para conocer de primera mano experiencias y tecnologías
+            existentes. Trabajamos en alianza con la Fundación Nacional para la Superación de la Pobreza y con
+            comunidades y actores locales para identificar en los territorios distintas tecnologías -artefactos,
+            prácticas- que ayudan a resolver problemas concretos. Conversamos con las personas o comunidades que han
+            desarrollado estas tecnologías para conocer su historia. Nos interesa abordar el desarrollo de estas
+            tecnologías con foco en su raigambre territorial y su relación con la ecología de prácticas, saberes y
+            formas de relación existentes en cada comunidad en donde surgen. Concretamente, para cada tecnología
+            identificada nos interesa conocer los siguientes elementos: la historia y características de la comunidad;
+            persona y territorio en la cual surge; las características de cada tecnología: su historia y problemas a los
+            cuales responde; la trayectoria de la tecnología: sus cambios y adaptaciones, así como los problemas y
+            posibilidades que enfrenta; los potenciales de transformación y multiplicación que subyacen a cada
+            tecnología; y las comunidades y actores que las desarrollan.
+        </p>
+        <p>
+            Luego de visitar y conocer las tecnologías, trabajamos en elaborar una ficha en donde se resumen estas
+            características y en subir esta ficha a la plataforma. El catalogo es un proceso abierto y nuestro objetivo
+            es continuar identificando y catalogando tecnologías en diversos territorios del país.
+        </p>
+        <p>
+            Si quiere contactarnos o contarnos de alguna tecnología interesante por favor escribir <a
+                href="{% url 'contacto' %}">aquí</a>.
+        </p>
+
+        <h2>
+            Patrocinios y Socios
+        </h2>
+        <p>
+            El trabajo del catálogo es fruto de la alianza del Núcleo Milenio de Investigación en Energía y Sociedad, el
+            Laboratorio de Transformaciones Sociales de la Universidad Diego Portales y la Fundación Nacional para la
+            Superación de la Pobreza.
+        </p>
+        <p>
+            Este proyecto fue financiado por la Iniciativa Científica Milenio (Proyecto NCS13_024), el proyecto FONDECYT
+            La vida Social de las tecnologías Limpias (N°1180115) y la Dirección de Investigación de la Universidad
+            Diego Portales.
+        </p>
+        <p>
+            También agradecemos por su colaboración a las siguientes instituciones, organizaciones y personas:
+        </p>
+        <ul>
+            <li>
+                I.M. de Alhué
+            </li>
+            <li>
+                I.M. de Paredones
+            </li>
+            <li>
+                I.M. de María Pinto
+            </li>
+            <li>
+                Grupo la Unidad Peumayén de Nerquihue, comuna de Lolol
+            </li>
+            <li>
+                Junta de Vecinos La Cabaña de Lolol
+            </li>
+            <li>
+                COPROQUINOA - Cooperativa de Productores de Quinua del Secano de O'Higgins
+            </li>
+            <li>
+                Club de Adulto Mayor La Cabaña de Lolol
+            </li>
+            <li>
+                Organización Comunitaria Madre Tierra Germinando Ranquilhue, comuna de Pumanque
+            </li>
+        </ul>
+        <p>
+            Y a los siguientes colaboradores:
+        </p>
+        <ul>
+            <li>
+                I.M. de Alhué: Marisol Cerda, María Inés Donoso, Deyanira Aravena
+            </li>
+            <li>
+                Fundación para la Superación de la Pobreza, Región Metropolitana 2020-2021: Antonia Garcés, Sebastián
+                Vega, Valeska Jarpa, Li Núñez, Samanta Sanhueza, Eric Sandoval, Nassim Ajraz, Valeria Olmos, Francisco
+                Aros.
+            </li>
+            <li>
+                Fundación para la Superación de la Pobreza, VI Región 2020-2021: Héctor Morales, Carolina Galaz, Diego
+                Pérez, Andrés Amigo, Camila Cid, Verónica Campos, María Paz Videla, Javiera Báez, Fernanda Poblete,
+                Carlos Jesús Nadal, Gabriel Mallea, Alexis Muñoz, Carol Núñez, Francisca Pinochet, Matías Dagach, Luna
+                Araya, Nicolás Martínez, Nicole Mendoza.
+            </li>
+            <li>
+                Fundación para la Superación de la Pobreza, VII Región 2020-2021: Cristian Cornejo, Gonzalo Núñez,
+                Carolina Urrea, Tania Rodríguez
+            </li>
+            <li>
+                Junta de Vecinos La Cabaña de Lolol
+            </li>
+        </ul>
+        <h2>
+            ¿Cómo ocupar el catálogo?
+        </h2>
+        <p>
+            Esta plataforma está pensada para ser usada por cualquier persona o comunidad que requiera conocer formas de
+            solución concretas a problemas vinculados a la crisis socio ecológicas. Acá podrán encontrar un catalogo de
+            distintas soluciones a una variedad de problemas y contextos. Hemos organizado las tecnologías en función de
+            categorías, que se pueden seleccionar de acuerdo a sus intereses de búsqueda.
+        </p>
+        <p>
+            Las tecnologías identificadas se pueden imprimir o compartir. También se puede identificar y contactar a la
+            persona o comunidad que está detrás de cada una de estas tecnologías. Para ello, se facilitó un botón de
+            contacto que permitirá acceder a los/as realizadores de cada tecnología a través de los equipos de Servicio
+            País que se encuentran en cada comuna.
+        </p>
+    </section>
+{% endblock %}

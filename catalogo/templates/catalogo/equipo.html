@@ -1,0 +1,197 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}
+    Equipo
+{% endblock %}
+
+{% block cuerpo %}
+   <section class="hero cabecera">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="title is-size-1 pb-5">Equipo</h1>
+                    </div>
+                    <div class="column is-narrow">
+                        <nav class="panel indice">
+                            <p class="panel-heading">
+                                Índice
+                            </p>
+                            <div class="panel-block">
+                                <a href="{% url 'iniciativa' %}">Iniciativa</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="#equipo">Equipo</a>
+                            </div>
+                            <div class="panel-block">
+                                <a href="{% url 'documentacion' %}">Documentación</a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section container" id="equipo">
+        <div class="columns is-multiline is-variable is-4">
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/tomas_ariztia.jpg' %}" alt="Tomás Ariztía">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Tomás Ariztía
+                        </h1>
+                        <p class="subtitle is-5">
+                            Director e Investigador
+                        </p>
+                        <p>Núcleo Milenio Energía y Sociedad. Escuela de Sociología UDP.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/aline_bravo.jpg' %}" alt="Aline Bravo">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Aline Bravo Sandoval
+                        </h1>
+                        <p class="subtitle is-5">
+                            Investigadora y coordinadora
+                        </p>
+                        <p>
+                            Núcleo Milenio Energía y Sociedad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/ignacio_nunez.jpg' %}" alt="Ignacio Ñúñez">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Ignacio Núñez Quiroz
+                        </h1>
+                        <p class="subtitle is-5">
+                            Investigador
+                        </p>
+                        <p>
+                            Núcleo Milenio Energía y Sociedad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/pedro_poblete.jpg' %}" alt="Pedro Poblete">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Pedro Poblete Lasserre
+                        </h1>
+                        <p class="subtitle is-5">
+                            Desarrollador y Diseñador UX
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/alen_lauzan.jpg' %}" alt="Alen lauzán">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Alen Lauzán
+                        </h1>
+                        <p class="subtitle is-5">
+                            Ilustrador
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/josefa_mendez.jpg' %}" alt="Avatar">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Josefa Méndez
+                        </h1>
+                        <p class="subtitle is-5">
+                            Diseñadora Gráfica
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/felipe_hernandez.jpg' %}" alt="Felipe Hernández">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Felipe Hernández
+                        </h1>
+                        <p class="subtitle is-5">
+                            Editor técnico
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{% static 'img/equipo/vicente_braithwaive.jpg' %}" alt="Vicente Braithwaite">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4">
+                            Vicente Braithwaite
+                        </h1>
+                        <p class="subtitle is-5">
+                            Editor de estilo
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}
